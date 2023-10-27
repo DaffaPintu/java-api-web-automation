@@ -1,6 +1,8 @@
 name: Automation Web and API Workflow
 
 on:
+  workflow_dispatch:
+    inputs: { }
   push:
     branches: [ "main" ]
   pull_request:
