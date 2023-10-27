@@ -12,15 +12,14 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.List;
 
-import static helper.Models.getListUsers;
-import static helper.Models.postCreateUsers;
+import static helper.Models.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class ApiPage {
 
     private static Response res;
 
-    String setURL = null;
+    String setURL, global_user_id = null;
 
     public String setupURL(String url) {
         switch (url) {
@@ -72,21 +71,17 @@ public class ApiPage {
         assertThat(email).isNotNull();
         assertThat(gender).isIn("female", "male");
         assertThat(status).isIn("active", "inactive");
+
+        global_user_id = Integer.toString(id);
+    }
+
+    public void hitDeleteUsers() {
+        res = deleteUser(setURL, global_user_id);
     }
 
     public void validationJSONSChema(String filename) {
         File JSONFile = Utility.getJSONSchemaFile(filename);
         res.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(JSONFile));
-    }
-
-    public void testAjah() {
-        Response response = RestAssured.given()
-                .header("Content-Type", "application/json")
-                .header("Accept", "application/json")
-                .header("key", "a6cd9638ef1b2f65ff3486ba2839c081")
-                .get("https://api.rajaongkir.com/starter/province");
-
-        System.out.println(response.getBody().asString());
     }
 }
 

@@ -1,4 +1,5 @@
 package helper;
+
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -34,5 +35,11 @@ public class Models {
 
         setupHeaders();
         return request.body(payload.toString()).when().post(endpoint);
+    }
+
+    public static Response deleteUser(String endpoint, String user_id) {
+        setupHeaders();
+        String finalEndpoint = endpoint + "/" + user_id;
+        return request.when().delete(finalEndpoint);
     }
 }

@@ -48,8 +48,8 @@ public class ApiStep {
         apiPage.validationBodyPostCreateNewUsers();
     }
 
-    @Given("test ajah haha")
-    public void testAjahHaha() {
-        apiPage.testAjah();
+    @And("hit api delete new")
+    public void hitApiDeleteNew() {
+        apiPage.hitDeleteUsers();
     }
 }
