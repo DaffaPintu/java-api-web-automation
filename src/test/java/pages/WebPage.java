@@ -9,7 +9,10 @@ public class WebPage {
     By input_username = By.name("username");
     By input_pwd = By.name("password");
     By btn_login = By.xpath("//button[@type = 'submit']");
-    By sidenav_my_indo = By.xpath("//*[text() = 'My Info']");
+    By input_serach_sidebar = By.xpath("//input[@placeholder = \"Search\"]");
+    By setSideMenu(String navmenu){
+        return By.xpath("//span[text()='"+navmenu+"']");
+    }
 
     public void goToLoginPage() {
         driver.get("https://opensource-demo.orangehrmlive.com/");
@@ -27,7 +30,11 @@ public class WebPage {
         driver.findElement(btn_login).click();
     }
 
-    public void assert_show_sidebar_my_info(){
-        driver.findElement(sidenav_my_indo).isDisplayed();
+    public void assert_show_sidebar(String navmenu){
+        driver.findElement(setSideMenu(navmenu)).isDisplayed();
+    }
+
+    public void inputSideNav(String navmenu){
+        driver.findElement(input_serach_sidebar).sendKeys(navmenu);
     }
 }

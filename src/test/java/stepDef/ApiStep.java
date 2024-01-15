@@ -52,4 +52,13 @@ public class ApiStep {
     public void hitApiDeleteNew() {
         apiPage.hitDeleteUsers();
     }
+    @And("hit api update data")
+    public void hitApiUpdateData() {
+        apiPage.hitUpdateUser();
+    }
+
+    @Then("validation response body update user")
+    public void validationResponseBodyUpdateUser() {
+        apiPage.validationBodyUpdateUsers();
+    }
 }

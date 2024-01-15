@@ -79,9 +79,28 @@ public class ApiPage {
         res = deleteUser(setURL, global_user_id);
     }
 
+    public void hitUpdateUser() {
+        res = updateUser(setURL, global_user_id);
+    }
+
     public void validationJSONSChema(String filename) {
         File JSONFile = Utility.getJSONSchemaFile(filename);
         res.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(JSONFile));
+    }
+
+    public void validationBodyUpdateUsers() {
+        JsonPath jsonPathEvaluator = res.jsonPath();
+        Integer id = jsonPathEvaluator.get("id");
+        String name = jsonPathEvaluator.get("name");
+        String email = jsonPathEvaluator.get("email");
+        String gender = jsonPathEvaluator.get("gender");
+        String status = jsonPathEvaluator.get("status");
+
+        assertThat(id).isNotNull();
+        assertThat(name).isNotNull();
+        assertThat(email).isNotNull();
+        assertThat(gender).isIn("female", "male");
+        assertThat(status).isIn("active", "inactive");
     }
 }
 

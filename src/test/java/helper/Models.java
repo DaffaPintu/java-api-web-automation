@@ -42,4 +42,20 @@ public class Models {
         String finalEndpoint = endpoint + "/" + user_id;
         return request.when().delete(finalEndpoint);
     }
+
+    public static Response updateUser(String endpoint, String user_id) {
+        setupHeaders();
+
+        String name = "Fawwaz Edit";
+        String gender = "male";
+        String email = generateRandomEmail();
+        JSONObject payload = new JSONObject();
+        payload.put("name", name);
+        payload.put("gender", gender);
+        payload.put("email", email);
+
+        String finalEndpoint = endpoint + "/" + user_id;
+
+        return request.body(payload.toString()).when().patch(finalEndpoint);
+    }
 }

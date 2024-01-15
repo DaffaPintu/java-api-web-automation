@@ -32,8 +32,13 @@ public class WebStep {
         webPage.clickBtnLogin();
     }
 
-    @Then("validation users can show side nav")
-    public void validationUsersCanShowSideNav() {
-        webPage.assert_show_sidebar_my_info();
+    @Then("validation users can show side nav {string}")
+    public void validationUsersCanShowSideNav(String navmenu) {
+        webPage.assert_show_sidebar(navmenu);
+    }
+
+    @And("user search sidenav {string}")
+    public void userSearchSidenav(String navmenu) {
+        webPage.inputSideNav(navmenu);
     }
 }
